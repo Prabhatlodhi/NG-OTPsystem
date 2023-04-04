@@ -26,8 +26,7 @@ function App() {
           
           type="tel"
           value={number}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
+          onChange={handleChange} 
         />
 
  
