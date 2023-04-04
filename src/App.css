@@ -5,6 +5,9 @@
   margin: 150px auto;
 }
 
+li{
+  list-style: none;
+}
 .child_div{
    text-align: center;
 }

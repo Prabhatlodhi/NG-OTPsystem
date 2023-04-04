@@ -1,18 +1,23 @@
 import React, { useState, useRef } from "react";
 import "./App.css";
 
-function App() {
+function Nextq() {
   const inputRefs = useRef([]);
 
   const [numbers, setNumbers] = useState(["", "", "", "", "", ""]);
 
   function handleChange(event, index) {
     const input = event.target.value;
-    if (!isNaN(input) && input.length <= 1) {
+    if (input === "" && index > 0) {
+      const newNumbers = [...numbers];
+      newNumbers[index] = "";
+      setNumbers(newNumbers);
+      inputRefs.current[index - 1].focus();
+    } else if (!isNaN(input) && input.length <= 1) {
       const newNumbers = [...numbers];
       newNumbers[index] = input;
       setNumbers(newNumbers);
-
+  
       // shift focus to the next input field
       if (index < inputRefs.current.length - 1) {
         inputRefs.current[index + 1].focus();
@@ -23,6 +28,8 @@ function App() {
       setNumbers(newNumbers);
     }
   }
+  
+  
 
   function handleClear() {
     setNumbers(["", "", "", "", "", ""]);
@@ -65,4 +72,4 @@ function App() {
   );
 }
 
-export default App;
+export default Nextq;
