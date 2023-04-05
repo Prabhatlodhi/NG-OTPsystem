@@ -7,27 +7,31 @@ function Nextq() {
   const [numbers, setNumbers] = useState(["", "", "", "", "", ""]);
 
   function handleChange(event, index) {
-    const input = event.target.value;
-    if (input === "" && index > 0) {
-      const newNumbers = [...numbers];
-      newNumbers[index] = "";
-      setNumbers(newNumbers);
-      inputRefs.current[index - 1].focus();
-    } else if (!isNaN(input) && input.length <= 1) {
-      const newNumbers = [...numbers];
-      newNumbers[index] = input;
-      setNumbers(newNumbers);
-  
-      // shift focus to the next input field
-      if (index < inputRefs.current.length - 1) {
-        inputRefs.current[index + 1].focus();
-      }
-    } else {
-      const newNumbers = [...numbers];
-      newNumbers[index] = "";
-      setNumbers(newNumbers);
+  const input = event.target.value;
+  if (input === "" && index > 0) {
+    const newNumbers = [...numbers];
+    newNumbers[index] = "";
+    setNumbers(newNumbers);
+    inputRefs.current[index - 1].focus();
+  } else if (!isNaN(input) && input.length <= 1) {
+    const newNumbers = [...numbers];
+    newNumbers[index] = input;
+    setNumbers(newNumbers);
+    
+    if (input === "" && index === 0) {
+      // if the first input box is empty after backspace, keep focus on it
+      inputRefs.current[index].focus();
+    } else if (index < inputRefs.current.length - 1) {
+      // otherwise, shift focus to the next input box
+      inputRefs.current[index + 1].focus();
     }
+  } else {
+    const newNumbers = [...numbers];
+    newNumbers[index] = "";
+    setNumbers(newNumbers);
   }
+}
+
   
   
 
